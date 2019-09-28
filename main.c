@@ -1,0 +1,50 @@
+#include <stdio.h>
+#include <SDL2/SDL.h>
+
+typedef enum {
+    false = 0,
+    true = 1
+} bool;
+
+int main(int argc, char* argv[])
+{
+    int posx, posy, width, height, duration;
+    posx = posy = 64;
+    width = height = 400;
+    duration = 1000 * 10;
+
+    Uint8 red, green, blue, alpha;
+    red = 255;
+    green = 20;
+    blue = 20;
+    alpha = 25;
+
+    SDL_Window *window;
+    SDL_Renderer *renderer;
+    const Uint8 *kbstate;
+    bool quit = false;
+    SDL_Event e;
+
+    SDL_Init(SDL_INIT_EVERYTHING);
+
+    window = SDL_CreateWindow("Hello World", posx, posy, width, height, SDL_WINDOW_SHOWN);
+    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+
+    while (!quit)
+    {
+        while (SDL_PollEvent(&e))
+        {
+            if (e.type == SDL_QUIT || e.type == SDL_KEYDOWN) quit = true;
+        }
+
+        SDL_SetRenderDrawColor(renderer, red, green, blue, alpha);        
+        SDL_RenderClear(renderer);
+        SDL_RenderPresent(renderer);
+    }
+
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
+    SDL_Quit();
+
+    return 0;
+}
