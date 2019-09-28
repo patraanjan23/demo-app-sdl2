@@ -1,4 +1,4 @@
 # demo-app-sdl2
 minimal app using sdl2
 
-![img]("screenshots/sdl2_window.png")
+![img](https://raw.githubusercontent.com/patraanjan23/demo-app-sdl2/master/screenshots/sdl2_window.png)
