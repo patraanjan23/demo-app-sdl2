@@ -6,6 +6,8 @@ typedef enum {
     true = 1
 } bool;
 
+void cleanup(char *types, ...);
+
 int main(int argc, char* argv[])
 {
     int posx, posy, width, height, duration;
@@ -41,10 +43,39 @@ int main(int argc, char* argv[])
         SDL_RenderClear(renderer);
         SDL_RenderPresent(renderer);
     }
-
-    SDL_DestroyRenderer(renderer);
-    SDL_DestroyWindow(window);
+    
+    cleanup("rw", renderer, window);
     SDL_Quit();
 
     return 0;
+}
+
+void cleanup(char *types, ...)
+{
+    va_list objs;
+    va_start(objs, types);
+
+    while (*types != '\0')
+    {
+        switch (*types)
+        {
+        case 'T':
+        case 't':
+            SDL_DestroyTexture(va_arg(objs, SDL_Texture *));
+            break;
+        case 'R':
+        case 'r':
+            SDL_DestroyRenderer(va_arg(objs, SDL_Renderer *));
+            break;
+        case 'W':
+        case 'w':
+            SDL_DestroyWindow(va_arg(objs, SDL_Window *));
+            break;
+        default:
+            printf("\nCLEANUP: INVALID TYPE\n");
+            break;
+        }
+        types++;
+    }
+    va_end(objs);
 }
