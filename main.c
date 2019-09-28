@@ -36,7 +36,7 @@ int main(int argc, char* argv[])
     {
         while (SDL_PollEvent(&e))
         {
-            if (e.type == SDL_QUIT || e.type == SDL_KEYDOWN) quit = true;
+            if (e.type == SDL_QUIT) quit = true;
         }
 
         SDL_SetRenderDrawColor(renderer, red, green, blue, alpha);        
