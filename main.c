@@ -13,7 +13,6 @@ int main(int argc, char* argv[])
     int posx, posy, width, height, duration;
     posx = posy = 64;
     width = height = 400;
-    duration = 1000 * 10;
 
     Uint8 red, green, blue, alpha;
     red = 255;
